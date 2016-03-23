@@ -1,0 +1,28 @@
+9 pts
+
+1. 
+
+Evidence looks ok.
+
+Good organization of screenshots.
+
+
+2.
+
+Sufficient knowledge of the terms primary key, candidate key, and superkey.
+
+
+3.
+
+Good example of datatypes and nulls.
+
+You did not discuss what fields were -nullable-.
+
+
+4.
+
+Very good explanations about the rules. 
+
+
+
+- Dr. Rivas
