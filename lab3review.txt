@@ -1,0 +1,35 @@
+9 pts
+
+Correct SQL statements
+Correct output for some queries
+SQL statements are somewhat readable
+
+Recommendations: 
+ To improve your readability, write queries instead of this
+  SELECT *
+  FROM Products
+  WHERE Products.city not In('Dallas') and Products.city not In('Duluth') and Products.priceUSD >= 1.00;
+ do it like this:
+  SELECT *
+  FROM products
+  WHERE city NOT IN ('Dallas', 'Duluth')
+    AND priceUSD >= 1.00;
+
+
+
+5. List the names of agents not in New York and not in Tokyo.
+
+Incorrect output
+- It seems like you did not read the correct instructions for this query. Read
+  it again, please.
+
+
+In general: 
+
+- Test all your SQL statements.
+
+- Make sure you read all the instructions for queries really well.
+
+
+
+- Dr. Rivas
