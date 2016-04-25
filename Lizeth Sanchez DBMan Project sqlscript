@@ -1,0 +1,358 @@
+DROP TABLE IF EXISTS People;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Teachers;
+DROP TABLE IF EXISTS VicePrincipals;
+DROP TABLE IF EXISTS Secretaries;
+DROP TABLE IF EXISTS Principals;
+DROP TABLE IF EXISTS Custodians;
+DROP TABLE IF EXISTS Classes;
+DROP TABLE IF EXISTS Salaries;
+
+--People--
+CREATE TABLE People (
+  pID char(10) NOT NULL,
+  firstName TEXT,
+  lastName TEXT,
+  address TEXT,
+  phoneNumber VARCHAR(10),
+  years NUMERIC(4),
+  PRIMARY KEY (pID)
+);
+
+
+--Students--
+CREATE TABLE Students (
+  pID char(10) NOT NULL REFERENCES People,
+  tuitionBill NUMERIC(10,2),
+  gpa DECIMAL(5,2),
+  gradeLevel TEXT,
+  PRIMARY KEY (pID)
+);
+
+
+--Teachers--
+CREATE TABLE Teachers (
+  pID char(10) NOT NULL REFERENCES People,
+  cID CHAR(10) NOT NULL REFERENCES Classes,
+  PRIMARY KEY (pID)
+);
+
+
+--VicePrincipals--
+CREATE TABLE VicePrincipals (
+  pID CHAR(10) NOT NULL REFERENCES People,
+  PRIMARY KEY (pID)
+);
+
+
+--Secretaries--
+CREATE TABLE Secretaries (
+  pID char(10) NOT NULL REFERENCES People,
+  PRIMARY KEY (pID)
+);
+
+
+--Principals--
+CREATE TABLE Principals (
+  pID CHAR(10) NOT NULL REFERENCES People,
+  PRIMARY KEY (pID)
+);
+
+
+--Custodians--
+CREATE TABLE Custodians (
+  pID CHAR(10) NOT NULL REFERENCES People,
+  PRIMARY KEY (pID)
+);
+
+
+--Classes--
+CREATE TABLE Classes (
+  cID CHAR(10) NOT NULL,
+  className TEXT,
+  studentTotal NUMERIC(3),
+  PRIMARY KEY (cID)
+);
+
+--StudentsRoster--
+CREATE TABLE StudentsRoster (
+  cID CHAR(10) NOT NULL REFERENCES Classes,
+  pID CHAR(10) NOT NULL REFERENCES People,
+  grade CHAR(1),
+  PRIMARY KEY (cID, pID)
+);
+
+
+--Salaries--
+CREATE TABLE Salaries (
+  pID char(10) NOT NULL REFERENCES People,
+  monthlyHours NUMERIC(3),
+  dollarTotal NUMERIC (10,2),
+  PRIMARY KEY (pID)
+);
+
+
+--SQL statements for loading example data into the Database--
+
+-- People --
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p01', 'John', 'Doe', '123 Lane St', '9384736593', '2' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p02', 'Jane', 'Doe', '456 Walk St', '7492837462', '3' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p03', 'Jimmy', 'Smith', '789 Drive St', '7492039482', '4' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p04', 'Jill', 'Johnson', '101 Pine St', '8302856282', '5' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p05', 'Janice', 'Carter', '283 Place St', '1728394748', '6' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p06', 'Emma', 'Frost', '3682 Manchester Ave', '7964374927', '7' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p07', 'Katherine', 'Pryde', '7834 Slauson Ave', '7492485726', '8' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p08', 'Warren', 'Worthington', '32 Beverly Blvd', '6789432657', '9' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p09', 'Kurt', 'Wagner', '4312 Sunset Blvd', '8764536278', '10' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p10', 'Logan', 'James', '1243 Carson Ave', '3452678401', '11' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p11', 'Ororo', 'Munroe', '92 Rain Dr', '1230987654', '12' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p12', 'Scott', 'Summers', '3 Red Ln', '5630298473', '13' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p13', 'Jean', 'Grey', '521 Alameda St', '6750981231', '14' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p14', 'Carlos', 'Javier', '43 Mente St', '7563928523', '15' );
+
+INSERT INTO People( pID, firstName, lastName, address, phoneNumber, years )
+  VALUES('p15', 'Erik', 'Lehnsherr', '938 German St', '7493827465', '16' );
+  
+
+-- Students --
+INSERT INTO Students( pID, tuitionBill, gpa, gradeLevel )
+  VALUES('p01', '5938', '3.01', 'sophomore' );
+
+INSERT INTO Students( pID, tuitionBill, gpa, gradeLevel )
+  VALUES('p02', '3897', '2.99', 'junior' );
+  
+INSERT INTO Students( pID, tuitionBill, gpa, gradeLevel )
+  VALUES('p03', '1094', '3.50', 'senior' );
+
+INSERT INTO Students( pID, tuitionBill, gpa, gradeLevel )
+  VALUES('p04', '1237', '2.5', 'junior' );
+
+INSERT INTO Students( pID, tuitionBill, gpa, gradeLevel )
+  VALUES('p05', '1928', '2.7', 'sophomore' );
+  
+
+--Classes--
+INSERT INTO Classes( cID, className, studentTotal )
+  VALUES('c01','English','5');
+
+INSERT INTO Classes( cID, className, studentTotal )
+  VALUES('c02','Calculus','4');
+
+INSERT INTO Classes( cID, className, studentTotal )
+  VALUES('c03','Mutant History','5');
+  
+  
+--Teachers--
+INSERT INTO Teachers( pID, cID )
+  VALUES('p11', 'c01' );
+
+INSERT INTO Teachers( pID, cID )
+  VALUES('p12', 'c02' );
+
+INSERT INTO Teachers( pID, cID )
+  VALUES('p13', 'c03' );
+  
+  
+--VicePrincipals--
+INSERT INTO VicePrincipals( pID )
+  VALUES('p15' );
+  
+
+--Principals--
+INSERT INTO Principals( pID )
+  VALUES('p14' );
+  
+
+--Secretaries--
+INSERT INTO Secretaries( pID)
+  VALUES('p06' );
+  
+INSERT INTO Secretaries( pID)
+  VALUES('p07' );
+  
+INSERT INTO Secretaries( pID)
+  VALUES('p08' );
+  
+  
+--Custodians--
+INSERT INTO Custodians(pID)
+  VALUES('p09' );
+
+INSERT INTO Custodians(pID)
+  VALUES('p10' );
+  
+  
+--Salaries--
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p06',140, 2800 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p07',140, 2800 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p08',140, 2800 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p09',120, 2400 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p10',120, 2400 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p11',145, 2900 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p12',145, 2900 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p13',145, 2900 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p14',160, 3200 );
+
+INSERT INTO Salaries(pID, monthlyHours, dollarTotal)
+  VALUES('p15',160, 3200 );
+  
+  
+--StudentsRoster--
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c01','p01', 'A' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c01','p02','C');
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c01','p03','B');
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c01','p04','B' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c01','p05','A' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c02','p01','A' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c02','p02', 'D' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c02','p03', 'F' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c02','p04','C' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c03','p01','B' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c03','p02','B' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c03','p03','C' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c03','p04','D' );
+  
+INSERT INTO StudentsRoster(cID, pID, grade)
+  VALUES('c03','p05','B' );
+  
+  
+--failingStudents--
+CREATE VIEW failingStudents AS
+ SELECT s.pid, p.firstName, p.lastName, sr.cid, sr.grade
+ FROM Students s 
+ LEFT OUTER JOIN studentsRoster sr ON s.pid = sr.pid
+ RIGHT OUTER JOIN People p ON s.pid = p.pid
+ WHERE sr.grade = 'D' OR sr.grade = 'F';
+ 
+ 
+--outstandingDebt--
+CREATE VIEW outstandingDebt AS
+  SELECT p.pid, p.firstName, p.lastName, p.address, s.tuitionBill
+  FROM People p 
+  RIGHT OUTER JOIN Students s
+  ON p.pid = s.pid
+  WHERE s.tuitionBill > 3500;
+  
+  
+--calculatedSalary--
+SELECT s.pid,p.firstName, p.lastName, (s.monthlyHours * 20) as calculatedSalary
+FROM Salaries s
+LEFT OUTER JOIN People p on s.pid = p.pid;
+
+
+--honorRoll--
+SELECT p.pid, p.firstName, p.lastName, sr.cid, sr.grade
+FROM studentsRoster sr
+LEFT OUTER JOIN People p on p.pid = sr.pid
+WHERE sr.grade = 'A';
+
+--For security purposes--
+CREATE ROLE DBAdmin;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO DBAdmin ;
+
+
+--For security purposes--
+CREATE ROLE secretaries;
+GRANT SELECT, INSERT, UPDATE ON students TO secretaries;
+GRANT SELECT, INSERT, UPDATE ON salaries TO secretaries;
+GRANT SELECT, INSERT, UPDATE ON teachers TO secretaries;
+GRANT SELECT, INSERT, UPDATE ON people TO secretaries;
+
+
+--For security purposes--
+CREATE ROLE teachers;
+GRANT SELECT, INSERT, UPDATE ON people TO teachers;
+
+
+--Stored Procedure addStudent--
+CREATE OR REPLACE FUNCTION addStudent(CHAR(10), REFCURSOR) RETURNS REFCURSOR AS
+$$
+DECLARE 
+        pID CHAR(10) :=$1;
+        resultset REFCURSOR :=$2;
+
+BEGIN 
+        OPEN resultset for
+                select pID
+                from People p
+                WHERE p.pID > 'p15';
+        RETURN resultset;
+END;
+$$
+language plpgsql;
+
+
+--Trigger newTuitionBill--
+CREATE TRIGGER newTuitionBill
+AFTER UPDATE ON Students
+FOR EACH ROW EXECUTE PROCEDURE addStudent();
+
