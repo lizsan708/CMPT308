@@ -1,0 +1,14 @@
+10 pts
+
+Correct output for all queries
+Correct queries
+Correct SQL statements
+SQL statements are readable
+
+In general: 
+
+- Very good!
+
+
+
+- Dr. Rivas
